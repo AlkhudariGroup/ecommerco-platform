@@ -9,8 +9,10 @@
  */
 
 import type * as agents from "../agents.js";
+import type * as clients from "../clients.js";
 import type * as users from "../users.js";
 import type * as woocommerce from "../woocommerce.js";
+import type * as woocommerce_actions from "../woocommerce_actions.js";
 
 import type {
   ApiFromModules,
@@ -20,8 +22,10 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   agents: typeof agents;
+  clients: typeof clients;
   users: typeof users;
   woocommerce: typeof woocommerce;
+  woocommerce_actions: typeof woocommerce_actions;
 }>;
 
 /**

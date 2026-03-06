@@ -7,7 +7,7 @@ import { api } from '../../../../convex/_generated/api';
 
 export default function ClientDashboard() {
   const saveCreds = useMutation(api.woocommerce.saveCredentials);
-  const searchProducts = useAction(api.woocommerce.searchProducts);
+  const searchProducts = useAction(api.woocommerce_actions.searchProducts);
   const setSystemRole = useMutation(api.agents.setSystemRole);
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState('');
@@ -26,11 +26,8 @@ export default function ClientDashboard() {
     setStatus('saving');
     setErrorMsg('');
     try {
-      // Save first
       await saveCreds({ url, key, secret });
-      // Then validate
-      const { validateCredentials } = await import('../../../../convex/_generated/api');
-      // dynamic import above won't work; use action directly via useAction hook instead
+      await onValidate();
     } catch {
       setStatus('error');
     }
