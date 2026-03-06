@@ -29,7 +29,28 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deploy on Render
+
+Click the button below to deploy using the included `render.yaml`:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/AlkhudariGroup/ecommerco-platform)
+
+### Required Environment Variables
+
+- `NEXT_PUBLIC_CONVEX_URL` = https://kindly-emu-39.convex.cloud  
+- `NEXT_PUBLIC_CONVEX_SITE_URL` = https://kindly-emu-39.convex.site  
+- `CONVEX_DEPLOYMENT` = prod:kindly-emu-39  
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` = pk_live_...  
+- `CLERK_SECRET_KEY` = sk_live_...  
+
+### Healthcheck
+- Render health check path: `/api/health` returns `{ ok: true }`
+
+### Build & Start
+- Build: `npm install && npm run build`  
+- Start: `npm start`
+
+## Local Development
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
