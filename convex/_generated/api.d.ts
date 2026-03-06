@@ -8,7 +8,9 @@
  * @module
  */
 
+import type * as agents from "../agents.js";
 import type * as users from "../users.js";
+import type * as woocommerce from "../woocommerce.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +19,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  agents: typeof agents;
   users: typeof users;
+  woocommerce: typeof woocommerce;
 }>;
 
 /**
