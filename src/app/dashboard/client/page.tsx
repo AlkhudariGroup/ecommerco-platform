@@ -18,6 +18,8 @@ export default function ClientDashboard() {
   const [q, setQ] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [searching, setSearching] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [kbItems, setKbItems] = useState<string[]>([]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -235,6 +237,63 @@ export default function ClientDashboard() {
             >
               Apply SalParts AI Assistant Role
             </button>
+          </div>
+          <div className="bg-white rounded-lg shadow border p-6">
+            <h2 className="text-xl font-bold mb-4">Voice Agent</h2>
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-gray-600">Enable voice agent</div>
+              <button
+                onClick={() => setVoiceEnabled((v) => !v)}
+                className={`px-3 py-1 rounded ${voiceEnabled ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+              >
+                {voiceEnabled ? 'On' : 'Off'}
+              </button>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg shadow border p-6">
+            <h2 className="text-xl font-bold mb-4">Knowledge Base</h2>
+            <div className="space-y-3">
+              <div className="flex gap-2">
+                <input
+                  className="flex-1 p-2 border rounded"
+                  placeholder="Add a URL or title"
+                  onKeyDown={(e) => {
+                    const v = (e.target as HTMLInputElement).value.trim();
+                    if (e.key === 'Enter' && v) {
+                      setKbItems((list) => [...list, v]);
+                      (e.target as HTMLInputElement).value = '';
+                    }
+                  }}
+                />
+                <button
+                  className="px-3 py-2 bg-slate-900 text-white rounded"
+                  onClick={() => {
+                    const el = document.querySelector<HTMLInputElement>('input[placeholder="Add a URL or title"]');
+                    const v = el?.value.trim();
+                    if (v) {
+                      setKbItems((list) => [...list, v]);
+                      if (el) el.value = '';
+                    }
+                  }}
+                >
+                  Add
+                </button>
+              </div>
+              <ul className="list-disc pl-5 text-sm">
+                {kbItems.map((it, i) => (
+                  <li key={i} className="flex items-center justify-between">
+                    <span>{it}</span>
+                    <button
+                      className="text-red-600"
+                      onClick={() => setKbItems((list) => list.filter((_, idx) => idx !== i))}
+                    >
+                      Remove
+                    </button>
+                  </li>
+                ))}
+                {kbItems.length === 0 && <li className="text-gray-500">No items</li>}
+              </ul>
+            </div>
           </div>
 
           <div className="bg-white rounded-lg shadow border p-6">
